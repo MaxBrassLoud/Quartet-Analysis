@@ -64,7 +64,14 @@
         "H4":"Mercedes SLS AMG Coupe Black Series"
     },
     
-    
+    "nicer_names_cats":{
+        "kmh": "Geschwindigkeit",
+        "kg": "Gewicht",
+        "ps": "Leistung",
+        "ccm": "Hubraum",
+        "pistons": "Zylinder",
+        "rpm": "Umdrehungen die Minute"
+    },
     "content": {
         
         "Lamborghini Aventador": {

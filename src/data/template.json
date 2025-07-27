@@ -1,0 +1,53 @@
+{
+    "name": "cars",
+    "categorys": "6",
+	"structure":{
+        "element_name":{
+            "cat1":{
+                "cat": "kmh",
+                "order": "<="
+            },
+            "cat2":{
+                "cat": "kg",
+                "order": ">="
+            },
+            "cat3":{
+                "cat": "ps",
+                "order": "<="
+            },
+            "cat4":{
+                "cat": "ccm",
+                "order": "<="
+            },
+            "cat5":{
+                "cat": "pistons",
+                "order": "<="
+            },
+            "cat6":{
+                "cat": "rpm",
+                "order": "<="
+            }
+        }
+    },
+    "Schortcutspan":{
+        "P1": ["A","F"],
+        "P2": [1,4]
+
+    },
+    "shortcuts": {
+        "A1":"Bentley Continental GT"
+    },
+    
+    
+    "content": {
+        
+        "Lamborghini Aventador": {
+            "kmh": "349",
+            "kg": "1575",
+            "ps": "700",
+            "ccm": "6498",
+            "pistons": "12",
+            "rpm": "8250"
+        }
+    }
+}
