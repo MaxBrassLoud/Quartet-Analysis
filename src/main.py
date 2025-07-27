@@ -32,11 +32,12 @@ class UI_Actions:
 class Backend:
     def __init__(self):
 
-        self.myCars:list = []
+        self.MyCards:list = []
         self.oponentcars:list = []
         self.shortcuts:json = None
         self.file_path:str = None
         self.data:json = None
+        self.temp_card:str = None
 
     def open_file(self, filepath) -> json:
         self.file_path = filepath
@@ -48,12 +49,35 @@ class Backend:
     def havedata(self, data:json):
         self.shortcuts = data["shortcuts"]
     
-    def AddMyCar(self, shortcut):
-        
-        if self.CheckShortcut(shortcut):
-            self.myCars.append(shortcut)
+    def AddMyCard(self, other):
+        other.input.clear()
+        shortcut = self.temp_card
+        if shortcut in self.MyCards:
+            print(f"My Cards{self.MyCards}")
+            print(f"Opponents Cards{self.oponentcars}")
+            return
+
         else:
-            raise SyntaxError(f"Invalid Syntax for {shortcut}")
+            self.MyCards.append(shortcut)        
+            if shortcut in self.oponentcars:
+                self.oponentcars.remove(shortcut)
+                
+            print(f" My Cards {self.MyCards}")
+            print(f"Opponents Cards{self.oponentcars}")
+
+    def LostCard(self, shortcut, other):
+        other.input.clear()
+        if shortcut in self.oponentcars:
+            print(f"My Cards{self.MyCards}")
+            print(f"Opponents Cards{self.oponentcars}")
+            return
+        if shortcut in self.MyCards:
+            self.MyCards.remove(shortcut)
+            self.oponentcars.append(shortcut)
+        else:
+            self.oponentcars.append(shortcut)
+        print(f" My Cards {self.MyCards}")
+        print(f"Opponents Cards{self.oponentcars}")
     
     def CheckShortcut(self, shortcut):
         if shortcut in self.shortcuts:
@@ -62,33 +86,36 @@ class Backend:
             return False
         
     def startEval(self, shortcut, UI):
+        self.temp_card = shortcut
         if self.CheckShortcut(shortcut):
             UI.specsTable.set_floats(self.get_car_scores(shortcut))
             UI.specsTable.set_specs(self.get_car_stats(shortcut))
             UI.LabelBest.configure(text=f"Die beste Kategorie für diese Karte ist: {self.bewertung(shortcut=shortcut)}")
+
     def parse_values(self, car_stats):
         return {k: int(v) for k, v in car_stats.items()}
 
     def bewertung(self, shortcut):
-
-        # Zugriff auf strukturierte Daten
         data = self.data
         structure = data["structure"]["element_name"]
         shortcuts = data["shortcuts"]
         content = data["content"]
+
         if shortcut not in shortcuts:
             return f"Ungültiges Kürzel: {shortcut}"
-        
+
         name = shortcuts[shortcut]
-        if not name in content:
-            return f"Element nicht gefunden: {name} "
-        
+        if name not in content:
+            return f"Element nicht gefunden: {name}"
+
         this_car = self.parse_values(content[name])
         scores = {cat_data["cat"]: 0 for cat_data in structure.values()}
 
         for other_name, other_data in content.items():
-            if other_name == name:
+            other_shortcut = next((k for k, v in shortcuts.items() if v == other_name), None)
+            if other_name == name or other_shortcut in self.MyCards:
                 continue
+
             other_car = self.parse_values(other_data)
 
             for cat_key, cat_data in structure.items():
@@ -101,17 +128,13 @@ class Backend:
                     scores[cat] += 1 if a > b else -1 if a < b else +0.5
                 elif order == ">=":
                     scores[cat] += 1 if a < b else -1 if a > b else +0.5
-                
-        
-        beste_kat = max(scores.items())# , key=lambda x: x[1])
-        print(beste_kat)
 
-        # print(f"\nBewertung für: {name} ({shortcut})")
-        # for cat, score in scores.items():
-        #     print(f"  {cat}: {float(score)}")
-        # print(f"\n➡️  Beste Kategorie: {beste_kat[0]} (Score: {beste_kat[1]})")
-        beste_kat = self.data["nicer_names_cats"][beste_kat]
+        beste_kat = max(scores.items(), key=lambda x: x[1])
+        print(beste_kat[0])
+        beste_kat = self.data["nicer_names_cats"][beste_kat[0]]
+        print(beste_kat)
         return beste_kat
+
     
     def get_car_stats(self, shortcut: str) -> dict:
         data = self.data
@@ -125,8 +148,8 @@ class Backend:
         if name not in content:
             raise ValueError(f"Element nicht gefunden: {name}")
 
-        # Gib die Rohwerte als Tabelle zurück
         return {name: content[name]}
+
 
 
     def get_car_scores(self, shortcut: str) -> dict:
@@ -146,8 +169,10 @@ class Backend:
         scores = {cat_data["cat"]: 0 for cat_data in structure.values()}
 
         for other_name, other_data in content.items():
-            if other_name == name:
+            other_shortcut = next((k for k, v in shortcuts.items() if v == other_name), None)
+            if other_name == name or other_shortcut in self.MyCards:
                 continue
+
             other_car = self.parse_values(other_data)
 
             for cat_key, cat_data in structure.items():
@@ -163,6 +188,8 @@ class Backend:
 
         return scores
 
+
+
 # Beispiel
 class UI:
     def __init__(self):
@@ -176,7 +203,7 @@ class UI:
         self.app.title("Quartet Strategie")
     def startframe(self):
         self.start_frame = ctk.CTkFrame(self.app)
-        self.start_frame.pack()
+        self.start_frame.pack(pady=20, padx=20, fill="both", expand=True)
 
         self.file_choose_label = ctk.CTkLabel(self.start_frame, text="Bitte wähle eine Datei aus welche eine Liste aller aller \n Karten des Spieles enthält siehe in der Dokumentation nach in welchem \n Format diese .json Datei aufgebaut sein muss!")
         self.file_choose_label.pack(padx="10", pady="25")
@@ -188,8 +215,8 @@ class UI:
         self.StartGameButton.pack(padx="10", pady="25")
 
     def mainframe(self):
-        self.main_Frame = ctk.CTkFrame(self.app)
-        self.main_Frame.pack()
+        self.main_Frame = ctk.CTkScrollableFrame(self.app)
+        self.main_Frame.pack(pady=20, padx=20, fill="both", expand=True)
         self.input = ip.ShortcutEntry(self.main_Frame, title="Shortcuts")
         self.input.pack()
         self.ev = ctk.CTkButton(self.main_Frame, text="Evaluate", command=lambda: Backend.startEval(self.Be, self.input.get_value(), self))
@@ -199,20 +226,19 @@ class UI:
         self.specsTable.pack()
 
         self.LabelBest = ctk.CTkLabel(self.main_Frame, text="")
-        self.LabelBest.pack()
+        self.LabelBest.pack(padx="10", pady="25")
 
-        
+        self.buttonlost = ctk.CTkButton(self.main_Frame, text="Karte Verloren", command=lambda: self.Be.LostCard(self.input.get_value(),self))
+        self.buttonlost.pack()#.grid(row=1, column=1, padx=5, pady=10)
+
+        self.buttonwon = ctk.CTkButton(self.main_Frame, text="Karte Gewonnen", command=lambda: self.Be.AddMyCard(self))
+        self.buttonwon.pack()#.grid(row=1, column=2, padx=5, pady=10)
 
         
 
     def mainloop(self):
         self.app.mainloop()
     
-    
-
-
-        
-
 if __name__ == "__main__":
     app = UI()
     app.startframe()
