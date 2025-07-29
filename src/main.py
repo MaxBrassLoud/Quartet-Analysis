@@ -208,7 +208,7 @@ class UI:
 
         self.app.geometry("500x500")
 
-        self.app.title("Quartet Strategie")
+        self.app.title("Quartet Hacks")
     def startframe(self):
         self.start_frame = ctk.CTkFrame(self.app)
         self.start_frame.pack(pady=20, padx=20, fill="both", expand=True)
