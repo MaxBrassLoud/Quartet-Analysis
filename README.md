@@ -88,11 +88,11 @@ python main.py
 
 4. Use the buttons to:
 
-  -Evaluate: Analyze the card and find its strongest category.
+  - Evaluate: Analyze the card and find its strongest category.
 
-  -Card Won: Add this card to your collection.
+  - Card Won: Add this card to your collection.
 
-  -Card Lost: Mark this card as lost and assign it to the opponent.
+  - Card Lost: Mark this card as lost and assign it to the opponent.
 
 All actions are processed locally – no data is sent externally.
 
