@@ -2,9 +2,11 @@ import json
 import customtkinter as ctk
 import ctk_adds.Shortcut_Input as ip
 import ctk_adds.specs as specs
+import logging
 from tkinter import filedialog as fd
 from tkinter import messagebox as mg
 
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', filename=".log")
 
 
 
@@ -33,7 +35,7 @@ class Backend:
     def __init__(self):
 
         self.MyCards:list = []
-        self.oponentcars:list = []
+        self.oponentcards:list = []
         self.shortcuts:json = None
         self.file_path:str = None
         self.data:json = None
@@ -46,38 +48,44 @@ class Backend:
             data = json.loads(data)
             self.data = data
             return data
+        
     def havedata(self, data:json):
         self.shortcuts = data["shortcuts"]
-    
-    def AddMyCard(self, other):
-        other.input.clear()
-        shortcut = self.temp_card
-        if shortcut in self.MyCards:
-            print(f"My Cards{self.MyCards}")
-            print(f"Opponents Cards{self.oponentcars}")
-            return
 
-        else:
-            self.MyCards.append(shortcut)        
-            if shortcut in self.oponentcars:
-                self.oponentcars.remove(shortcut)
-                
-            print(f" My Cards {self.MyCards}")
-            print(f"Opponents Cards{self.oponentcars}")
+        
+
+
+    def AddMyCard(self, shortcut, other):
+        """Fügt eine Karte zu MyCards hinzu, wenn sie beim Gegner war."""
+        if self.CheckShortcut(shortcut):
+            logging.info(f"Won Shortcut: {shortcut}")
+            other.input.clear()
+            try:
+                if shortcut not in self.MyCards:
+                    self.MyCards.append(shortcut)
+
+                if shortcut in self.oponentcards:
+                    self.oponentcards.remove(shortcut)
+            finally:
+                logging.info(f"MyCards: {self.MyCards}")
+                logging.info(f"OponentCards: {self.oponentcards}")
+
 
     def LostCard(self, shortcut, other):
-        other.input.clear()
-        if shortcut in self.oponentcars:
-            print(f"My Cards{self.MyCards}")
-            print(f"Opponents Cards{self.oponentcars}")
-            return
-        if shortcut in self.MyCards:
-            self.MyCards.remove(shortcut)
-            self.oponentcars.append(shortcut)
-        else:
-            self.oponentcars.append(shortcut)
-        print(f" My Cards {self.MyCards}")
-        print(f"Opponents Cards{self.oponentcars}")
+        """Entfernt eine Karte aus MyCards und fügt sie dem Gegner hinzu."""
+        if self.CheckShortcut(shortcut):
+            logging.info(f"Lost Shortcut: {shortcut}")
+            other.input.clear()
+            try:
+                if shortcut in self.MyCards:
+                    self.MyCards.remove(shortcut)
+
+                if shortcut not in self.oponentcards:
+                    self.oponentcards.append(shortcut)
+            finally:
+                logging.info(f"MyCards: {self.MyCards}")
+                logging.info(f"OponentCards: {self.oponentcards}")
+
     
     def CheckShortcut(self, shortcut):
         if shortcut in self.shortcuts:
@@ -231,7 +239,7 @@ class UI:
         self.buttonlost = ctk.CTkButton(self.main_Frame, text="Karte Verloren", command=lambda: self.Be.LostCard(self.input.get_value(),self))
         self.buttonlost.pack()#.grid(row=1, column=1, padx=5, pady=10)
 
-        self.buttonwon = ctk.CTkButton(self.main_Frame, text="Karte Gewonnen", command=lambda: self.Be.AddMyCard(self))
+        self.buttonwon = ctk.CTkButton(self.main_Frame, text="Karte Gewonnen", command=lambda: self.Be.AddMyCard(self.input.get_value(), self))
         self.buttonwon.pack()#.grid(row=1, column=2, padx=5, pady=10)
 
         

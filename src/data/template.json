@@ -1,7 +1,7 @@
 {
-    "name": "cars",
+    "name": "Autos Luxuswagen",
     "categorys": "6",
-	"structure":{
+	    "structure":{
         "element_name":{
             "cat1":{
                 "cat": "kmh",
@@ -29,16 +29,49 @@
             }
         }
     },
-    "Schortcutspan":{
-        "P1": ["A","F"],
-        "P2": [1,4]
-
-    },
     "shortcuts": {
-        "A1":"Bentley Continental GT"
+        "A1":"Bentley Continental GT",
+        "A2":"Porsche Panamera Turbo",
+        "A3":"BMW 650i Gran Coupe",
+        "A4":"Lamborghini Aventador",
+        "B1":"Ruf Rt 12",
+        "B2":"Lexus LC 500",
+        "B3":"Mercedes AMG GT",
+        "B4":"Mazzanti Evantra",
+        "C1":"McLaren 720S",
+        "C2":"Maserati Quattroporte",
+        "C3":"Audi R8 V10 plus",
+        "C4":"Panoz Abruzzi",
+        "D1":"Bugatti Chiron",
+        "D2":"Koenigsegg Agera",
+        "D3":"Pagani Huayra",
+        "D4":"Rolls-Royce Ghost",
+        "E1":"Rolls-Royce Wraith",
+        "E2":"Audi A8",
+        "E3":"Porsche 911 Carera S",
+        "E4":"BMW i8",
+        "F1":"Rolls-Royce Phantom",
+        "F2":"Porsche918Spyder",
+        "F3":"Lamborghini Huracan",
+        "F4":"BMW 750Li",
+        "G1":"Mercedes-Maybach S 650",
+        "G2":"Jaguar XKR-S",
+        "G3":"Bentley Mulsanne Speed",
+        "G4":"Lexus TMG Sports 650",
+        "H1":"Ascari KZ1",
+        "H2":"Fisker Karma",
+        "H3":"Aston Martin Vanquish",
+        "H4":"Mercedes SLS AMG Coupe Black Series"
     },
     
-    
+    "nicer_names_cats":{
+        "kmh": "Geschwindigkeit",
+        "kg": "Gewicht",
+        "ps": "Leistung",
+        "ccm": "Hubraum",
+        "pistons": "Zylinder",
+        "rpm": "Umdrehungen die Minute"
+    },
     "content": {
         
         "Lamborghini Aventador": {
@@ -48,6 +81,254 @@
             "ccm": "6498",
             "pistons": "12",
             "rpm": "8250"
+        },
+        "Ascari KZ1": {
+            "kmh": "320",
+            "kg": "1275",
+            "ps": "500",
+            "ccm": "4941",
+            "pistons": "8",
+            "rpm": "7000"
+        },
+        "Porsche 911 Carera S": {
+            "kmh": "302",
+            "kg": "1420",
+            "ps": "400",
+            "ccm": "3800",
+            "pistons": "6",
+            "rpm": "7400"
+        },
+        "Bentley Continental GT": {
+            "kmh": "318",
+            "kg": "2320",
+            "ps": "575",
+            "ccm": "5998",
+            "pistons": "12",
+            "rpm": "6000"
+        },
+        "Koenigsegg Agera": {
+            "kmh": "395",
+            "kg": "1290",
+            "ps": "910",
+            "ccm": "4700",
+            "pistons": "8",
+            "rpm": "6850"
+        },
+        "Rolls-Royce Wraith": {
+            "kmh": "250",
+            "kg": "2360",
+            "ps": "632",
+            "ccm": "6592",
+            "pistons": "12",
+            "rpm": "5600"
+        },
+        "Pagani Huayra": {
+            "kmh": "370",
+            "kg": "1350",
+            "ps": "700",
+            "ccm": "5980",
+            "pistons": "12",
+            "rpm": "7200"
+        },
+        "Lexus LC 500": {
+            "kmh": "270",
+            "kg": "1935",
+            "ps": "477",
+            "ccm": "4969",
+            "pistons": "8",
+            "rpm": "7100"
+        },
+        "Maserati Quattroporte": {
+            "kmh": "280",
+            "kg": "1700",
+            "ps": "530",
+            "ccm": "4700",
+            "pistons": "8",
+            "rpm": "8250"
+        },
+        "Mercedes AMG GT": {
+            "kmh": "304",
+            "kg": "1645",
+            "ps": "462",
+            "ccm": "3982",
+            "pistons": "8",
+            "rpm": "6000"
+        },
+        "Aston Martin Vanquish": {
+            "kmh": "295",
+            "kg": "1739",
+            "ps": "573",
+            "ccm": "5935",
+            "pistons": "12",
+            "rpm": "6750"
+        },
+        "Bentley Mulsanne Speed": {
+            "kmh": "305",
+            "kg": "2685",
+            "ps": "537",
+            "ccm": "6752",
+            "pistons": "8",
+            "rpm": "4200"
+        },
+        "BMW 650i Gran Coupe": {
+            "kmh": "250",
+            "kg": "1940",
+            "ps": "450",
+            "ccm": "4395",
+            "pistons": "8",
+            "rpm": "6000"
+        },
+        "Mercedes-Maybach S 650": {
+            "kmh": "250",
+            "kg": "2360",
+            "ps": "630",
+            "ccm": "5980",
+            "pistons": "12",
+            "rpm": "5000"
+        },
+        "Porsche918Spyder": {
+            "kmh": "340",
+            "kg": "1640",
+            "ps": "887",
+            "ccm": "4600",
+            "pistons": "8",
+            "rpm": "8600"
+        },
+        "Rolls-Royce Phantom": {
+            "kmh": "250",
+            "kg": "2560",
+            "ps": "571",
+            "ccm": "6750",
+            "pistons": "12",
+            "rpm": "5000"
+        },
+        "BMW i8": {
+            "kmh": "250",
+            "kg": "1485",
+            "ps": "362",
+            "ccm": "1499",
+            "pistons": "3",
+            "rpm": "5800"
+        },
+        "Jaguar XKR-S": {
+            "kmh": "300",
+            "kg": "1753",
+            "ps": "560",
+            "ccm": "5000",
+            "pistons": "8",
+            "rpm": "6000"
+        },
+        "Audi A8": {
+            "kmh": "250",
+            "kg": "1920",
+            "ps": "340",
+            "ccm": "2995",
+            "pistons": "6",
+            "rpm": "6400"
+        },
+        "Audi R8 V10 plus": {
+            "kmh": "317",
+            "kg": "1570",
+            "ps": "550",
+            "ccm": "5204",
+            "pistons": "10",
+            "rpm": "8000"
+        },
+        "Lexus TMG Sports 650": {
+            "kmh": "320",
+            "kg": "2050",
+            "ps": "650",
+            "ccm": "5000",
+            "pistons": "8",
+            "rpm": "7500"
+        },
+        "Ruf Rt 12": {
+            "kmh": "360",
+            "kg": "1500",
+            "ps": "650",
+            "ccm": "3746",
+            "pistons": "6",
+            "rpm": "7000"
+        },
+        "BMW 750Li": {
+            "kmh": "250",
+            "kg": "2055",
+            "ps": "407",
+            "ccm": "4395",
+            "pistons": "8",
+            "rpm": "5500"
+        },
+        "Porsche Panamera Turbo": {
+            "kmh": "303",
+            "kg": "2019",
+            "ps": "500",
+            "ccm": "4806",
+            "pistons": "8",
+            "rpm": "6000"
+        },
+        "Lamborghini Huracan": {
+            "kmh": "325",
+            "kg": "1422",
+            "ps": "610",
+            "ccm": "5204",
+            "pistons": "10",
+            "rpm": "8250"
+        },
+        "Mazzanti Evantra": {
+            "kmh": "350",
+            "kg": "1300",
+            "ps": "701",
+            "ccm": "7000",
+            "pistons": "8",
+            "rpm": "6600"
+        },
+        "Fisker Karma": {
+            "kmh": "201",
+            "kg": "1950",
+            "ps": "403",
+            "ccm": "1998",
+            "pistons": "4",
+            "rpm": "5300"
+        },
+        "Rolls-Royce Ghost": {
+            "kmh": "250",
+            "kg": "2435",
+            "ps": "571",
+            "ccm": "6592",
+            "pistons": "12",
+            "rpm": "5250"
+        },
+        "McLaren 720S": {
+            "kmh": "341",
+            "kg": "1283",
+            "ps": "720",
+            "ccm": "3994",
+            "pistons": "8",
+            "rpm": "7500"
+        },
+        "Bugatti Chiron": {
+            "kmh": "420",
+            "kg": "1995",
+            "ps": "1500",
+            "ccm": "7993",
+            "pistons": "16",
+            "rpm": "6700"
+        },
+        "Panoz Abruzzi": {
+            "kmh": "340",
+            "kg": "1400",
+            "ps": "640",
+            "ccm": "6200",
+            "pistons": "8",
+            "rpm": "6500"
+        },
+        "Mercedes SLS AMG Coupe Black Series": {
+            "kmh": "315",
+            "kg": "1550",
+            "ps": "631",
+            "ccm": "6208",
+            "pistons": "8",
+            "rpm": "7400"
         }
     }
 }
